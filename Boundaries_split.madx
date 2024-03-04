@@ -1,0 +1,956 @@
+title, s='TERA ring, first';
+
+
+
+rho=1.90;
+
+dq:=0.1;  //added 0.25m space for dipole coils in the sequences
+
+
+/************************/
+d1                 =                  3 ;
+d2                 =                3.6 ;
+kb                 =       0.6887212564 ;
+klqq1              =      1.16923e-02;  !0.01715481075 1.16923e-02;! 
+klqq2              =       -5.14745e-02;   !-0.09507776434 ; ! // OK!
+/************************/
+
+fphi=0.5;
+phid=fphi *pi/4.;  //dipole bending angle in focusing plane
+phif=(1-fphi) *pi/4.;  //dipole bending angle in focusing plane
+
+
+lbd:=phid*rho;
+lbf:=phif*rho;
+
+lquad:=0.1;  //very thin!
+kqq1:=klqq1/lquad;
+
+kqq2:=klqq2/lquad;
+
+
+//scale factor for F magnets
+sf=((lbf-0.2-0.08)/lbf);
+
+
+//new lengths
+
+lbf_n:=sf*lbf;
+phif_n:=sf*phif;
+
+
+
+phid_n:=sf*phid;
+
+
+lcell1:=lbf+lbd+lbd+lbf+0.25+d1+0.25; 
+lcell2:=lbd+lbf+lbf+lbd+0.25+d2+0.25;  
+lcell3:=lbd+lbf+lbf+lbd+0.25+d1+0.25;  //same as lcell1
+lcell4:=lbd+lbf+lbf+lbd+0.25+d2+0.25;  //same as lcell2
+
+//end lengths
+//end scale factor
+ef=(0.2/lbf);
+e_1:=(lbf*ef);
+phi_e:=(phif*ef);
+
+//scale factor for boundary region lengths
+fr=0.08/lbf;
+
+//boundary region lengths
+lbf_fr:=fr*lbf;
+phif_fr:=fr*phif;
+phid_fr:=fr*phid;
+
+//scale factor for d magnets
+sf_d=(lbd-0.08)/lbd;
+lbd_n=sf_d*lbd;
+phid_n=sf_d*phid;
+
+circum:=lcell1+lcell2+lcell3+lcell4;
+
+kbf:=(kb/fphi)*.5; 
+kbd:=(-kb/(1-fphi))*.5;
+
+
+
+
+//new sbends
+//fringe sbends
+mb_1: sbend, l:=e_1/14, angle:=phi_e/14, k1:=kbf; // , kill_exi_fringe=true;
+
+//boundary sbends
+mb_f: sbend, l:=lbf_fr/7, angle:=phif_fr/7, k1:=kbf;
+mb_d:	sbend, l:=lbf_fr/7, angle:=phid_fr/7, k1:=kbd;
+
+//body sbends
+mb1: sbend, l:=lbf_n/2, angle:=phif_n/2, k1:=kbf; // , kill_exi_fringe=true;
+mb2: sbend, l:=lbd_n/2, angle:=phid_n/2, k1:=kbd; // , kill_ent_fringe=true, kill_exi_fringe=true;
+mb3: sbend, l:=lbd_n/2, angle:=phid_n/2, k1:=kbd; // , kill_ent_fringe=true, kill_exi_fringe=true;
+mb4: sbend, l:=lbf_n/2, angle:=phif_n/2, k1:=kbf; // , kill_ent_fringe=true;
+
+qq1: quadrupole, l:=lquad, k1:=kqq1;
+qq2: quadrupole, l:=lquad, k1:=kqq2;
+
+xs1: multipole, knl:={0,0,Sres1};
+xs2: multipole, knl:={0,0,Sres2};
+xs3: multipole, knl:={0,0,Sres3};
+xs4: multipole, knl:={0,0,Sres4};
+
+//fringe sbends
+mb_4: sbend, l:=e_1/14, angle:=phi_e/14, k1:=kbf; // , kill_ent_fringe=true;
+
+
+
+v=1.;
+v3=1.;
+vs=1.;
+//first fringe section's multipoles 
+
+ml1: multipole, knl:={0,0,-0.4871681656645386*v,-16.016991400363437*v3},ksl:={0,0,0.5307428626129052*vs,-11.09905492951136*vs}; 
+ml2: multipole, knl:={0,0,-0.4804509958458262*v,-10.20840804750376*v3},ksl:={0,0,0.508357780280473*vs,-11.41486318208876*vs};
+ml3: multipole, knl:={0,0,-0.45528329936493456*v,9.423717561517186*v3},ksl:={0,0,0.4567469763154498*vs,2.0756065641015473*vs};
+ml4: multipole, knl:={0,0,-0.27303203373590645*v,-2.896184752226036*v3},ksl:={0,0,0.3055642827443705*vs,14.037056891072515*vs};
+ml5: multipole, knl:={0,0,0.02038138009202044*v,-22.01556134203056*v3},ksl:={0,0,-0.01508782865260645*vs,-22.804523421122383*vs};
+ml6: multipole, knl:={0,0,0.05174218483386841*v,-8.970348423954219*v3},ksl:={0,0,-0.07602460847450193*vs,-22.78911652068677*vs};
+ml7: multipole, knl:={0,0,-0.034065731415453694*v,2.88202210838588*v3},ksl:={0,0,0.06054335956208744*vs,34.89711052734199*vs};
+ml8: multipole, knl:={0,0,0.066468180095946*v,18.522250657685348*v3},ksl:={0,0,-0.11354372372271147*vs,7.963050547790211*vs};
+ml9: multipole, knl:={0,0,0.35275074395045286*v,-3.2594754334631757*v3},ksl:={0,0,-0.3975512413982656*vs,-8.80253972188471*vs};
+ml10: multipole, knl:={0,0,0.47498251046574624*v,-4.688032184909635*v3},ksl:={0,0,-0.5030159316089317*vs,6.025778447545501*vs};
+ml11: multipole, knl:={0,0,0.4964345025258606*v,8.317709873474797*v3},ksl:={0,0,-0.537536722778985*vs,11.55171950538101*vs};
+ml12: multipole, knl:={0,0,0.48712626998623615*v,11.666290046525537*v3},ksl:={0,0,-0.5294721901931233*vs,7.4328091377555685*vs};
+ml13: multipole, knl:={0,0,0.44890333389938397*v,8.18473656515226*v3},ksl:={0,0,-0.4812501450534567*vs,1.0877805969806278*vs};
+ml14: multipole, knl:={0,0,0.3875798209098354*v,3.3286392594474297*v3},ksl:={0,0,-0.4062488473279943*vs,-3.5686095514502174*vs};
+
+//last fringe section's multipoles
+mr1: multipole, knl:={0,0,-0.2964646335848042*v,4.478680818611716*v3},ksl:={0,0,0.17620275550147055*vs,5.961514293456651*vs}; 
+mr2: multipole, knl:={0,0,-0.2615172759179128*v,4.273140555446359*v3},ksl:={0,0,0.15478083856934438*vs,5.04227959054867*vs}; 
+mr3: multipole, knl:={0,0,-0.22930511156608727*v,3.9730599763162076*v3},ksl:={0,0,0.1351957693107076*vs,4.167553700818213*vs}; 
+mr4: multipole, knl:={0,0,-0.1998616870560519*v,3.616693483745257*v3},ksl:={0,0,0.11742333311151554*vs,3.368087493684782*vs}; 
+mr5: multipole, knl:={0,0,-0.17316054424981212*v,3.233738360454517*v3},ksl:={0,0,0.10140866907293508*vs,2.659625905118473*vs}; 
+mr6: multipole, knl:={0,0,-0.1491286163206374*v,2.8462387276109586*v3},ksl:={0,0,0.0870752431103371*vs,2.0467069727707456*vs}; 
+mr7: multipole, knl:={0,0,-0.12765721146192485*v,2.469863640660001*v3},ksl:={0,0,0.07433146333289473*vs,1.5267326740523756*vs}; 
+mr8: multipole, knl:={0,0,-0.10861095018259474*v,2.115239570738037*v3},ksl:={0,0,0.06307543405922225*vs,1.0933817487970114*vs}; 
+mr9: multipole, knl:={0,0,-0.09183519206386614*v,1.7891353779314454*v3},ksl:={0,0,0.0531984983995958*vs,0.7388903015768736*vs}; 
+mr10: multipole, knl:={0,0,-0.07716237436025847*v,1.4954116040929395*v3},ksl:={0,0,0.04458810958952894*vs,0.4552073948846288*vs}; 
+mr11: multipole, knl:={0,0,-0.064417497852642096*v,1.2357335594400867*v3},ksl:={0,0,0.037130345242284375*vs,0.2343518929278876*vs}; 
+mr12: multipole, knl:={0,0,-0.053422861725505706*v,1.0100982288076035*v3},ksl:={0,0,0.030712172566302088*vs,0.06838935780836707*vs}; 
+mr13: multipole, knl:={0,0,-0.04400209455828037*v,0.8172393225051997*v3},ksl:={0,0,0.025223455400908246*vs,-0.05063806033690105*vs}; 
+mr14: multipole, knl:={0,0,-0.03598352109744969*v,0.6549634285427749*v3},ksl:={0,0,0.020558654803651044*vs,-0.1306583811835763*vs}; 
+mr15: multipole, knl:={0,0,-0.0292029067571268*v,0.5204476761583836*v3},ksl:={0,0,0.016618183560568687*vs,-0.17937153963703392*vs}; 
+
+
+//boundary multipoles
+vb:=1;
+vb3:=1;
+vb_s:=1;
+
+vb_2:=1;
+vb3_2:=1;
+
+mbo1: multipole, knl:={0,0,-0.10578568255632508*vb,-1.7695249316716903*vb3},ksl:={0,0,0.05766067180010148*vb_s,1.1113670939284694*vb_s}; 
+mbo2: multipole, knl:={0,0,-0.212980831274407678*vb,-23.513273961817244*vb3},ksl:={0,0,0.10227207796581053*vb_s,-11.013113431180173*vb_s}; 
+mbo3: multipole, knl:={0,0,-0.29315233265412116*vb,-65.84979266052437*vb3},ksl:={0,0,0.12747037202731076*vb_s,-40.581091887566856*vb_s}; 
+mbo4: multipole, knl:={0,0,-0.5922402701810517*vb,-37.1338863553952*vb3},ksl:={0,0,0.20994368120957752*vb_s,-48.156874467993546*vb_s}; 
+mbo5: multipole, knl:={0,0,-1.049008910233157*vb,39.67715793079784*vb3},ksl:={0,0,0.3802610839393113*vb_s,42.488578483731466*vb_s}; 
+mbo6: multipole, knl:={0,0,-0.7064916025992468*vb,32.39492624623957*vb3},ksl:={0,0,0.1301521299409159*vb_s,62.818990523984965*vb_s}; 
+mbo7: multipole, knl:={0,0,0.2855627238994961*vb,-2.2068400560924735*vb3},ksl:={0,0,-0.49160378185639236*vb_s,-63.239619153682476*vb_s}; 
+mbo8: multipole, knl:={0,0,0.8030617634362693*vb,-36.71636471217406*vb3},ksl:={0,0,-0.6230909756858322*vb_s,-22.733305047532*vb_s}; 
+mbo9: multipole, knl:={0,0,0.4846976598114819*vb,11.123334170308675*vb3},ksl:={0,0,-0.3497249975703268*vb_s,52.98943109635431*vb_s}; 
+mbo10: multipole, knl:={0,0,0.19557031362849517*vb,52.61077807054631*vb3},ksl:={0,0,-0.21017129433311874*vb_s,26.65798406088218*vb_s}; 
+mbo11: multipole, knl:={0,0,0.1378856351640835*vb,27.6795901253432*vb3},ksl:={0,0,-0.13358769567092804*vb_s,4.338169498600428*vb_s}; 
+mbo12: multipole, knl:={0,0,0.08590312139412823*vb,8.737059271883023*vb3},ksl:={0,0,-0.0655207899523608*vb_s,0.9945372544508941*vb_s}; 
+mbo13: multipole, knl:={0,0,0.04732459771781584*vb,2.6637319516237863*vb3},ksl:={0,0,-0.02856358854965656*vb_s,1.1903266408282263*vb_s}; 
+mbo14: multipole, knl:={0,0,0.028864233676300855*vb,1.2279852979035892*vb3},ksl:={0,0,-0.014556182032686327*vb_s,1.0692391397966525*vb_s}; 
+
+//second boundary
+
+mbo1_2: multipole, knl:={0,0,0.007223192193239236*vb_2,0.9706240104615155*vb3_2},ksl:={0,0,-0.004614598374711559*vb_s,1.0270137208923105*vb_s}; 
+mbo2_2: multipole, knl:={0,0,0.007838981494520504*vb_2,0.8232050745459396*vb3_2},ksl:={0,0,-0.004756184464182839*vb_s,0.9350577071402437*vb_s}; 
+mbo3_2: multipole, knl:={0,0,0.0071560936218587196*vb_2,0.9889978448331698*vb3_2},ksl:={0,0,-0.004594881896315195*vb_s,0.9325764748814984*vb_s}; 
+mbo4_2: multipole, knl:={0,0,0.007294111646231306*vb_2,0.9895671608745725*vb3_2},ksl:={0,0,-0.004575285980340094*vb_s,0.9147495431475223*vb_s}; 
+mbo5_2: multipole, knl:={0,0,0.006911184546022744*vb_2,0.9734583222343282*vb3_2},ksl:={0,0,-0.004241531930422298*vb_s,1.0589709227542377*vb_s}; 
+mbo6_2: multipole, knl:={0,0,0.007318703887193348*vb_2,0.8351797456097165*vb3_2},ksl:={0,0,-0.004315950350097562*vb_s,1.0425827694357126*vb_s}; 
+mbo7_2: multipole, knl:={0,0,0.00670066942478427*vb_2,1.0024022117500149*vb3_2},ksl:={0,0,-0.004275688346829408*vb_s,0.9862823729307869*vb_s}; 
+mbo8_2: multipole, knl:={0,0,0.006974486613050624*vb_2,0.9511160073653431*vb3_2},ksl:={0,0,-0.00428370948936649*vb_s,0.9814675860906219*vb_s}; 
+mbo9_2: multipole, knl:={0,0,0.007572267637057288*vb_2,0.7871940051277023*vb3_2},ksl:={0,0,-0.004483048645621236*vb_s,0.9037835813810038*vb_s}; 
+mbo10_2: multipole, knl:={0,0,0.00667958631890997*vb_2,0.9832498367763142*vb3_2},ksl:={0,0,-0.004241305507302841*vb_s,0.9428337088575709*vb_s}; 
+mbo11_2: multipole, knl:={0,0,0.007169288389825514*vb_2,0.8044325561519822*vb3_2},ksl:={0,0,-0.0040625322549711915*vb_s,0.9879233284826433*vb_s}; 
+mbo12_2: multipole, knl:={0,0,0.006917567388678093*vb_2,0.9362122789383872*vb3_2},ksl:={0,0,-0.004266649927832744*vb_s,0.8820435060145864*vb_s}; 
+mbo13_2: multipole, knl:={0,0,0.00642640153837558*vb_2,0.9475215618057139*vb3_2},ksl:={0,0,-0.003763602013095826*vb_s,0.9710918098965273*vb_s}; 
+mbo14_2: multipole, knl:={0,0,0.00618090774164319*vb_2,0.9323745837852584*vb3_2},ksl:={0,0,-0.003756299765093449*vb_s,1.0410548430327464*vb_s}; 
+mbo15_2: multipole, knl:={0,0,0.005959145051006259*vb_2,0.9336752533390947*vb3_2},ksl:={0,0,-0.0037417269982282825*vb_s,0.9950276107875115*vb_s}; 
+
+
+
+//body multipoles
+//remember the first one is actually 5.7
+vm:=1;
+vm3:=1;
+vm_s:=1;
+multib1: multipole, knl:={0,0,0.5700238516186646*vm,-43.38619445185049*vm3},ksl:={0,0,-0.25045559158368297*vm_s,-99.42698250372672*vm_s}; 
+multib2: multipole, knl:={0,0,0.07462415326321332*vm,6.986709428879126*vm3},ksl:={0,0,-0.06267754245879376*vm_s,8.178371393440205*vm_s}; 
+multib3: multipole, knl:={0,0,0.5640552330000959*vm,23.996879355529757*vm3},ksl:={0,0,-0.017866821228654857*vm_s,14.061461124250231*vm_s}; 
+multib4: multipole, knl:={0,0,0.35203210212359637*vm,18.725247186248133*vm3},ksl:={0,0,-0.011556316052677951*vm_s,19.52240308978721*vm_s}; 
+multib5: multipole, knl:={0,0,0.36537854751180804*vm,14.991539404681731*vm3},ksl:={0,0,-0.01166207750772154*vm_s,18.43340162815925*vm_s}; 
+multib6: multipole, knl:={0,0,0.31819652054289155*vm,19.75360265477609*vm3},ksl:={0,0,-0.010855573017060707*vm_s,20.18448877920332*vm_s}; 
+multib7: multipole, knl:={0,0,0.8190028795640463*vm,22.221963429169787*vm3},ksl:={0,0,-0.522779990874822*vm_s,14.123064592999215*vm_s}; 
+multib8: multipole, knl:={0,0,-0.2964646335726396*vm,4.478680819935598*vm3},ksl:={0,0,0.17620275547812156*vm_s,5.961514300991128*vm_s}; 
+
+
+
+
+teracell1: sequence, refer=entry, l:=lcell1;
+//1st 14 sbends section
+
+ml1.1:ml1, at:=0;
+mb1_1.1:mb_1, at:=0;
+ml2.1:ml2, at:=e_1/14;
+mb1_2.1:mb_1, at:=e_1/14;
+ml3.1:ml3, at:=2*e_1/14;
+mb1_3.1:mb_1, at:=2*e_1/14;
+ml4.1:ml4, at:=3*e_1/14;
+mb1_4.1:mb_1, at:=3*e_1/14;
+ml5.1:ml5, at:=4*e_1/14;
+mb1_5.1:mb_1, at:=4*e_1/14;
+ml6.1:ml6, at:=5*e_1/14;
+mb1_6.1:mb_1, at:=5*e_1/14;
+ml7.1:ml7, at:=6*e_1/14;
+mb1_7.1:mb_1, at:=6*e_1/14;
+ml8.1:ml8, at:=7*e_1/14;
+mb1_8.1:mb_1, at:=7*e_1/14;
+ml9.1:ml9, at:=8*e_1/14;
+mb1_9.1:mb_1, at:=8*e_1/14;
+ml10.1:ml10, at:=9*e_1/14;
+mb1_10.1:mb_1, at:=9*e_1/14;
+ml11.1:ml11, at:=10*e_1/14;
+mb1_11.1:mb_1, at:=10*e_1/14;
+ml12.1:ml12, at:=11*e_1/14;
+mb1_12.1:mb_1, at:=11*e_1/14;
+ml13.1:ml13, at:=12*e_1/14;
+mb1_13.1:mb_1, at:=12*e_1/14;
+ml14.1:ml14, at:=13*e_1/14;
+mb1_14.1:mb_1, at:=13*e_1/14;
+
+
+//main body of magnet
+//first proper magnet chunk (focusing)
+//b1.1:multib1, at:=e_1;
+mb1.1:mb1, at:=e_1;
+b2.1:multib2, at:=e_1 + lbf_n/2;
+mb2.1:mb1, at:=e_1+lbf_n/2;
+
+//boundary region (F)
+mbo1.1:mbo1, at:=lbf-lbf_fr;
+mbf_1.1:mb_f, at:=lbf-lbf_fr;
+mbo2.1: mbo2, at:=lbf-lbf_fr*6/7;
+mbf_2.1:mb_f, at:=lbf-lbf_fr*6/7;
+mbo3.1: mbo3, at:=lbf-lbf_fr*5/7;
+mbf_3.1:mb_f, at:=lbf-lbf_fr*5/7;
+mbo4.1: mbo4, at:=lbf-lbf_fr*4/7;
+mbf_4.1:mb_f, at:=lbf-lbf_fr*4/7;
+mbo5.1: mbo5, at:=lbf-lbf_fr*3/7;
+mbf_5.1:mb_f, at:=lbf-lbf_fr*3/7;
+mbo6.1: mbo6, at:=lbf-lbf_fr*2/7;
+mbf_6.1:mb_f, at:=lbf-lbf_fr*2/7;
+mbo7.1: mbo7, at:=lbf-lbf_fr/7;
+mbf_7.1:mb_f, at:=lbf-lbf_fr/7;
+
+
+//boundary region (D)
+mbo8.1: mbo8, at:=lbf;
+mbd_1.1:mb_d, at:=lbf;
+mbo9.1: mbo9, at:=lbf+lbf_fr/7;
+mbd_2.1:mb_d, at:=lbf+lbf_fr/7;
+mbo10.1: mbo10, at:=lbf+2*lbf_fr/7;
+mbd_3.1:mb_d, at:=lbf+2*lbf_fr/7;
+mbo11.1: mbo11, at:=lbf+3*lbf_fr/7;
+mbd_4.1:mb_d, at:=lbf+3*lbf_fr/7;
+mbo12.1: mbo12, at:=lbf+4*lbf_fr/7;
+mbd_5.1:mb_d, at:=lbf+4*lbf_fr/7;
+mbo13.1: mbo13, at:=lbf+5*lbf_fr/7;
+mbd_6.1:mb_d, at:=lbf+5*lbf_fr/7;
+mbo14.1: mbo14, at:=lbf+6*lbf_fr/7;
+mbd_7.1:mb_d, at:=lbf+6*lbf_fr/7;
+
+//second magnet chunk (defocusing)
+//b3.1:multib3, at:=lbf+lbf_fr;
+mb3.1:mb2, at:=lbf+lbf_fr;
+b4.1:multib4, at:=lbf+lbf_fr+lbd_n/2;
+mb4.1:mb2, at:=lbf+lbf_fr+lbd_n/2;
+
+//third magnet chunk (defocusing)
+b5.1:multib5, at:=lbf+lbf_fr+lbd_n;
+mb5.1:mb3, at:=lbf+lbf_fr+lbd_n;
+b6.1:multib6, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+mb6.1:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+
+//boundary region (D)
+mbo1_2.1: mbo1_2, at:=lbf+lbf+lbf-lbf_fr;
+mbd_8.1:mb_d, at:=lbf+lbf+lbf-lbf_fr;
+mbo2_2.1: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbd_9.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbo3_2.1: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbd_10.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbo4_2.1: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbd_11.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbo5_2.1: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbd_12.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbo6_2.1: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbd_13.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbo7_2.1: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7;
+mbd_14.1:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7;
+
+//boundary region (F)
+mbo8_2.1:mbo8_2, at:=lbf+lbf+lbd;
+mbf_8.1:mb_f, at:=lbf+lbf+lbd;
+mbo9_2.1:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7;
+mbf_9.1:mb_f, at:=lbf+lbf+lbd+lbf_fr/7;
+mbo10_2.1:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbf_10.1:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbo11_2.1:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbf_11.1:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbo12_2.1:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbf_12.1:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbo13_2.1:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbf_13.1:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbo14_2.1:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7;
+mbf_14.1:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7;
+
+
+//last chunk (focusing)
+//b7.1:multib7, at:=lbf+lbf+lbd+lbf_fr;
+mb7.1:mb4, at:=lbf+lbf+lbd+lbf_fr;
+b8.1:multib8, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+mb8.1:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+
+L=lbd+lbf+lbf+lbd;
+
+//2nd 14 sbends section
+mr1.1:mr1, at:=L-e_1;
+mb2_1.1:mb_4, at:=L-e_1;
+mr2.1:mr2, at:=L-13*e_1/14;
+mb2_2.1:mb_4, at:=L-13*e_1/14;
+mr3.1:mr3, at:=L-12*e_1/14;
+mb2_3.1:mb_4, at:=L-12*e_1/14;
+mr4.1:mr4, at:=L-11*e_1/14;
+mb2_4.1:mb_4, at:=L-11*e_1/14;
+mr5.1:mr5, at:=L-10*e_1/14;
+mb2_5.1:mb_4, at:=L-10*e_1/14;
+mr6.1:mr6, at:=L-9*e_1/14;
+mb2_6.1:mb_4, at:=L-9*e_1/14;
+mr7.1:mr7, at:=L-8*e_1/14;
+mb2_7.1:mb_4, at:=L-8*e_1/14;
+mr8.1:mr8, at:=L-7*e_1/14;
+mb2_8.1:mb_4, at:=L-7*e_1/14;
+mr9.1:mr9, at:=L-6*e_1/14;
+mb2_9.1:mb_4, at:=L-6*e_1/14;
+mr10.1:mr10, at:=L-5*e_1/14;
+mb2_10.1:mb_4, at:=L-5*e_1/14;
+mr11.1:mr11, at:=L-4*e_1/14;
+mb2_11.1:mb_4, at:=L-4*e_1/14;
+mr12.1:mr12, at:=L-3*e_1/14;
+mb2_12.1:mb_4, at:=L-3*e_1/14;
+mr13.1:mr13, at:=L-2*e_1/14;
+mb2_13.1:mb_4, at:=L-2*e_1/14;
+mr14.1:mr14, at:=L-e_1/14;
+mb2_14.1:mb_4, at:=L-e_1/14;
+mr15.1:mr15, at:=L;
+
+qq1a.1:qq1, at:=lbd+lbf+lbf+lbd+0.25+dq;
+//p1:marker, at=lcell-d2*3./4.;
+//p2:marker, at=lcell-d2/2.;
+//p3:marker, at=lcell-d2/4.;
+qq1b.1:qq1, at:=lcell1-0.25 -lquad -dq;
+
+endsequence;
+
+
+
+
+teracell2: sequence, refer=entry, l:=lcell2;
+//1st 14 sbends section
+ml1.2:ml1, at:=0;
+mb1_1.2:mb_1, at:=0;
+ml2.2:ml2, at:=e_1/14;
+mb1_2.2:mb_1, at:=e_1/14;
+ml3.2:ml3, at:=2*e_1/14;
+mb1_3.2:mb_1, at:=2*e_1/14;
+ml4.2:ml4, at:=3*e_1/14;
+mb1_4.2:mb_1, at:=3*e_1/14;
+ml5.2:ml5, at:=4*e_1/14;
+mb1_5.2:mb_1, at:=4*e_1/14;
+ml6.2:ml6, at:=5*e_1/14;
+mb1_6.2:mb_1, at:=5*e_1/14;
+ml7.2:ml7, at:=6*e_1/14;
+mb1_7.2:mb_1, at:=6*e_1/14;
+ml8.2:ml8, at:=7*e_1/14;
+mb1_8.2:mb_1, at:=7*e_1/14;
+ml9.2:ml9, at:=8*e_1/14;
+mb1_9.2:mb_1, at:=8*e_1/14;
+ml10.2:ml10, at:=9*e_1/14;
+mb1_10.2:mb_1, at:=9*e_1/14;
+ml11.2:ml11, at:=10*e_1/14;
+mb1_11.2:mb_1, at:=10*e_1/14;
+ml12.2:ml12, at:=11*e_1/14;
+mb1_12.2:mb_1, at:=11*e_1/14;
+ml13.2:ml13, at:=12*e_1/14;
+mb1_13.2:mb_1, at:=12*e_1/14;
+ml14.2:ml14, at:=13*e_1/14;
+mb1_14.2:mb_1, at:=13*e_1/14;
+
+
+//main body of magnet
+//first proper magnet chunk (focusing)
+//b1.2:multib1, at:=e_1;
+mb1.2:mb1, at:=e_1;
+b2.2:multib2, at:=e_1 + lbf_n/2;
+mb2.2:mb1, at:=e_1+lbf_n/2;
+
+//boundary region (F)
+mbo1.2:mbo1, at:=lbf-lbf_fr;
+mbf_1.2:mb_f, at:=lbf-lbf_fr;
+mbo2.2: mbo2, at:=lbf-lbf_fr*6/7;
+mbf_2.2:mb_f, at:=lbf-lbf_fr*6/7;
+mbo3.2: mbo3, at:=lbf-lbf_fr*5/7;
+mbf_3.2:mb_f, at:=lbf-lbf_fr*5/7;
+mbo4.2: mbo4, at:=lbf-lbf_fr*4/7;
+mbf_4.2:mb_f, at:=lbf-lbf_fr*4/7;
+mbo5.2: mbo5, at:=lbf-lbf_fr*3/7;
+mbf_5.2:mb_f, at:=lbf-lbf_fr*3/7;
+mbo6.2: mbo6, at:=lbf-lbf_fr*2/7;
+mbf_6.2:mb_f, at:=lbf-lbf_fr*2/7;
+mbo7.2: mbo7, at:=lbf-lbf_fr/7;
+mbf_7.2:mb_f, at:=lbf-lbf_fr/7;
+
+
+//boundary region (D)
+mbo8.2: mbo8, at:=lbf;
+mbd_1.2:mb_d, at:=lbf;
+mbo9.2: mbo9, at:=lbf+lbf_fr/7;
+mbd_2.2:mb_d, at:=lbf+lbf_fr/7;
+mbo10.2: mbo10, at:=lbf+2*lbf_fr/7;
+mbd_3.2:mb_d, at:=lbf+2*lbf_fr/7;
+mbo11.2: mbo11, at:=lbf+3*lbf_fr/7;
+mbd_4.2:mb_d, at:=lbf+3*lbf_fr/7;
+mbo12.2: mbo12, at:=lbf+4*lbf_fr/7;
+mbd_5.2:mb_d, at:=lbf+4*lbf_fr/7;
+mbo13.2: mbo13, at:=lbf+5*lbf_fr/7;
+mbd_6.2:mb_d, at:=lbf+5*lbf_fr/7;
+mbo14.2: mbo14, at:=lbf+6*lbf_fr/7;
+mbd_7.2:mb_d, at:=lbf+6*lbf_fr/7;
+
+//second magnet chunk (defocusing)
+//b3.2:multib3, at:=lbf+lbf_fr;
+mb3.2:mb2, at:=lbf+lbf_fr;
+b4.2:multib4, at:=lbf+lbf_fr+lbd_n/2;
+mb4.2:mb2, at:=lbf+lbf_fr+lbd_n/2;
+
+//third magnet chunk (defocusing)
+b5.2:multib5, at:=lbf+lbf_fr+lbd_n;
+mb5.2:mb3, at:=lbf+lbf_fr+lbd_n;
+b6.2:multib6, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+mb6.2:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+
+//boundary region (D)
+mbo1_2.2: mbo1_2, at:=lbf+lbf+lbf-lbf_fr;
+mbd_8.2:mb_d, at:=lbf+lbf+lbf-lbf_fr;
+mbo2_2.2: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbd_9.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbo3_2.2: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbd_10.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbo4_2.2: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbd_11.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbo5_2.2: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbd_12.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbo6_2.2: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbd_13.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbo7_2.2: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7;
+mbd_14.2:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7;
+
+//boundary region (F)
+mbo8_2.2:mbo8_2, at:=lbf+lbf+lbd;
+mbf_8.2:mb_f, at:=lbf+lbf+lbd;
+mbo9_2.2:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7;
+mbf_9.2:mb_f, at:=lbf+lbf+lbd+lbf_fr/7;
+mbo10_2.2:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbf_10.2:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbo11_2.2:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbf_11.2:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbo12_2.2:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbf_12.2:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbo13_2.2:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbf_13.2:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbo14_2.2:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7;
+mbf_14.2:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7;
+
+
+//last chunk (focusing)
+//b7.2:multib7, at:=lbf+lbf+lbd+lbf_fr;
+mb7.2:mb4, at:=lbf+lbf+lbd+lbf_fr;
+b8.2:multib8, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+mb8.2:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+
+L=lbd+lbf+lbf+lbd;
+
+//2nd 14 sbends section
+mr1.2:mr1, at:=L-e_1;
+mb2_1.2:mb_4, at:=L-e_1;
+mr2.2:mr2, at:=L-13*e_1/14;
+mb2_2.2:mb_4, at:=L-13*e_1/14;
+mr3.2:mr3, at:=L-12*e_1/14;
+mb2_3.2:mb_4, at:=L-12*e_1/14;
+mr4.2:mr4, at:=L-11*e_1/14;
+mb2_4.2:mb_4, at:=L-11*e_1/14;
+mr5.2:mr5, at:=L-10*e_1/14;
+mb2_5.2:mb_4, at:=L-10*e_1/14;
+mr6.2:mr6, at:=L-9*e_1/14;
+mb2_6.2:mb_4, at:=L-9*e_1/14;
+mr7.2:mr7, at:=L-8*e_1/14;
+mb2_7.2:mb_4, at:=L-8*e_1/14;
+mr8.2:mr8, at:=L-7*e_1/14;
+mb2_8.2:mb_4, at:=L-7*e_1/14;
+mr9.2:mr9, at:=L-6*e_1/14;
+mb2_9.2:mb_4, at:=L-6*e_1/14;
+mr10.2:mr10, at:=L-5*e_1/14;
+mb2_10.2:mb_4, at:=L-5*e_1/14;
+mr11.2:mr11, at:=L-4*e_1/14;
+mb2_11.2:mb_4, at:=L-4*e_1/14;
+mr12.2:mr12, at:=L-3*e_1/14;
+mb2_12.2:mb_4, at:=L-3*e_1/14;
+mr13.2:mr13, at:=L-2*e_1/14;
+mb2_13.2:mb_4, at:=L-2*e_1/14;
+mr14.2:mr14, at:=L-e_1/14;
+mb2_14.2:mb_4, at:=L-e_1/14;
+mr15.2:mr15, at:=L;
+
+
+qq2a.2:qq2, at:=lbd+lbf+lbf+lbd+0.25+dq;
+
+//ES1, at:=0.25, from=qq2a.2;
+//MS1, at:=-0.25, from=qq2b.2;
+
+//p1:marker, at=lquad/2., from=qq2;
+//p3:marker, at=0.8, from=p1;
+//p4:marker, at=0.8, from=p3;
+//p5:marker, at=-0.8, from=p2;
+//p2:marker, at=lcell2-0.25 -lquad -dq;
+qq2b.2:qq2, at:=lcell2-0.25 -lquad -dq;
+endsequence;
+
+teracell3: sequence, refer=entry, l:=lcell3;
+//1st 14 sbends section
+ml1.3:ml1, at:=0;
+mb1_1.3:mb_1, at:=0;
+ml2.3:ml2, at:=e_1/14;
+mb1_2.3:mb_1, at:=e_1/14;
+ml3.3:ml3, at:=2*e_1/14;
+mb1_3.3:mb_1, at:=2*e_1/14;
+ml4.3:ml4, at:=3*e_1/14;
+mb1_4.3:mb_1, at:=3*e_1/14;
+ml5.3:ml5, at:=4*e_1/14;
+mb1_5.3:mb_1, at:=4*e_1/14;
+ml6.3:ml6, at:=5*e_1/14;
+mb1_6.3:mb_1, at:=5*e_1/14;
+ml7.3:ml7, at:=6*e_1/14;
+mb1_7.3:mb_1, at:=6*e_1/14;
+ml8.3:ml8, at:=7*e_1/14;
+mb1_8.3:mb_1, at:=7*e_1/14;
+ml9.3:ml9, at:=8*e_1/14;
+mb1_9.3:mb_1, at:=8*e_1/14;
+ml10.3:ml10, at:=9*e_1/14;
+mb1_10.3:mb_1, at:=9*e_1/14;
+ml11.3:ml11, at:=10*e_1/14;
+mb1_11.3:mb_1, at:=10*e_1/14;
+ml12.3:ml12, at:=11*e_1/14;
+mb1_12.3:mb_1, at:=11*e_1/14;
+ml13.3:ml13, at:=12*e_1/14;
+mb1_13.3:mb_1, at:=12*e_1/14;
+ml14.3:ml14, at:=13*e_1/14;
+mb1_14.3:mb_1, at:=13*e_1/14;
+
+
+//main body of magnet
+//first proper magnet chunk (focusing)
+//b1.3:multib1, at:=e_1;
+mb1.3:mb1, at:=e_1;
+b2.3:multib2, at:=e_1 + lbf_n/2;
+mb2.3:mb1, at:=e_1+lbf_n/2;
+
+//boundary region (F)
+mbo1.3:mbo1, at:=lbf-lbf_fr;
+mbf_1.3:mb_f, at:=lbf-lbf_fr;
+mbo2.3: mbo2, at:=lbf-lbf_fr*6/7;
+mbf_2.3:mb_f, at:=lbf-lbf_fr*6/7;
+mbo3.3: mbo3, at:=lbf-lbf_fr*5/7;
+mbf_3.3:mb_f, at:=lbf-lbf_fr*5/7;
+mbo4.3: mbo4, at:=lbf-lbf_fr*4/7;
+mbf_4.3:mb_f, at:=lbf-lbf_fr*4/7;
+mbo5.3: mbo5, at:=lbf-lbf_fr*3/7;
+mbf_5.3:mb_f, at:=lbf-lbf_fr*3/7;
+mbo6.3: mbo6, at:=lbf-lbf_fr*2/7;
+mbf_6.3:mb_f, at:=lbf-lbf_fr*2/7;
+mbo7.3: mbo7, at:=lbf-lbf_fr/7;
+mbf_7.3:mb_f, at:=lbf-lbf_fr/7;
+
+
+//boundary region (D)
+mbo8.3: mbo8, at:=lbf;
+mbd_1.3:mb_d, at:=lbf;
+mbo9.3: mbo9, at:=lbf+lbf_fr/7;
+mbd_2.3:mb_d, at:=lbf+lbf_fr/7;
+mbo10.3: mbo10, at:=lbf+2*lbf_fr/7;
+mbd_3.3:mb_d, at:=lbf+2*lbf_fr/7;
+mbo11.3: mbo11, at:=lbf+3*lbf_fr/7;
+mbd_4.3:mb_d, at:=lbf+3*lbf_fr/7;
+mbo12.3: mbo12, at:=lbf+4*lbf_fr/7;
+mbd_5.3:mb_d, at:=lbf+4*lbf_fr/7;
+mbo13.3: mbo13, at:=lbf+5*lbf_fr/7;
+mbd_6.3:mb_d, at:=lbf+5*lbf_fr/7;
+mbo14.3: mbo14, at:=lbf+6*lbf_fr/7;
+mbd_7.3:mb_d, at:=lbf+6*lbf_fr/7;
+
+//second magnet chunk (defocusing)
+//b3.3:multib3, at:=lbf+lbf_fr;
+mb3.3:mb2, at:=lbf+lbf_fr;
+b4.3:multib4, at:=lbf+lbf_fr+lbd_n/2;
+mb4.3:mb2, at:=lbf+lbf_fr+lbd_n/2;
+
+//third magnet chunk (defocusing)
+b5.3:multib5, at:=lbf+lbf_fr+lbd_n;
+mb5.3:mb3, at:=lbf+lbf_fr+lbd_n;
+b6.3:multib6, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+mb6.3:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+
+//boundary region (D)
+mbo1_2.3: mbo1_2, at:=lbf+lbf+lbf-lbf_fr;
+mbd_8.3:mb_d, at:=lbf+lbf+lbf-lbf_fr;
+mbo2_2.3: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbd_9.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbo3_2.3: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbd_10.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbo4_2.3: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbd_11.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbo5_2.3: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbd_12.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbo6_2.3: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbd_13.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbo7_2.3: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7;
+mbd_14.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7;
+
+//boundary region (F)
+mbo8_2.3:mbo8_2, at:=lbf+lbf+lbd;
+mbf_8.3:mb_f, at:=lbf+lbf+lbd;
+mbo9_2.3:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7;
+mbf_9.3:mb_f, at:=lbf+lbf+lbd+lbf_fr/7;
+mbo10_2.3:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbf_10.3:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbo11_2.3:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbf_11.3:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbo12_2.3:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbf_12.3:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbo13_2.3:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbf_13.3:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbo14_2.3:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7;
+mbf_14.3:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7;
+
+
+//last chunk (focusing)
+//b7.3:multib7, at:=lbf+lbf+lbd+lbf_fr;
+mb7.3:mb4, at:=lbf+lbf+lbd+lbf_fr;
+b8.3:multib8, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+mb8.3:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+
+L=lbd+lbf+lbf+lbd;
+
+//2nd 14 sbends section
+mr1.3:mr1, at:=L-e_1;
+mb2_1.3:mb_4, at:=L-e_1;
+mr2.3:mr2, at:=L-13*e_1/14;
+mb2_2.3:mb_4, at:=L-13*e_1/14;
+mr3.3:mr3, at:=L-12*e_1/14;
+mb2_3.3:mb_4, at:=L-12*e_1/14;
+mr4.3:mr4, at:=L-11*e_1/14;
+mb2_4.3:mb_4, at:=L-11*e_1/14;
+mr5.3:mr5, at:=L-10*e_1/14;
+mb2_5.3:mb_4, at:=L-10*e_1/14;
+mr6.3:mr6, at:=L-9*e_1/14;
+mb2_6.3:mb_4, at:=L-9*e_1/14;
+mr7.3:mr7, at:=L-8*e_1/14;
+mb2_7.3:mb_4, at:=L-8*e_1/14;
+mr8.3:mr8, at:=L-7*e_1/14;
+mb2_8.3:mb_4, at:=L-7*e_1/14;
+mr9.3:mr9, at:=L-6*e_1/14;
+mb2_9.3:mb_4, at:=L-6*e_1/14;
+mr10.3:mr10, at:=L-5*e_1/14;
+mb2_10.3:mb_4, at:=L-5*e_1/14;
+mr11.3:mr11, at:=L-4*e_1/14;
+mb2_11.3:mb_4, at:=L-4*e_1/14;
+mr12.3:mr12, at:=L-3*e_1/14;
+mb2_12.3:mb_4, at:=L-3*e_1/14;
+mr13.3:mr13, at:=L-2*e_1/14;
+mb2_13.3:mb_4, at:=L-2*e_1/14;
+mr14.3:mr14, at:=L-e_1/14;
+mb2_14.3:mb_4, at:=L-e_1/14;
+mr15.3:mr15, at:=L;
+
+qq1a.3:qq1, at:=lbd+lbf+lbf+lbd+0.25+dq;
+
+xs1.3:xs1, at:=lbd+lbf+lbf+lbd+0.25+d1/2.;
+xs2.3:xs2, at:=-0.15, from=qq1b.3;
+
+//p1:marker, at=lcell3-d2*3./4.;
+//p2:marker, at=lcell3-d2/2.;
+//p3:marker, at=lcell3-d2/4.;
+qq1b.3:qq1, at:=lcell3-0.25 -lquad -dq;
+endsequence;
+
+teracell4: sequence, refer=entry, l:=lcell4;
+//1st 14 sbends section
+ml1.4:ml1, at:=0;
+mb1_1.4:mb_1, at:=0;
+ml2.4:ml2, at:=e_1/14;
+mb1_2.4:mb_1, at:=e_1/14;
+ml3.4:ml3, at:=2*e_1/14;
+mb1_3.4:mb_1, at:=2*e_1/14;
+ml4.4:ml4, at:=3*e_1/14;
+mb1_4.4:mb_1, at:=3*e_1/14;
+ml5.4:ml5, at:=4*e_1/14;
+mb1_5.4:mb_1, at:=4*e_1/14;
+ml6.4:ml6, at:=5*e_1/14;
+mb1_6.4:mb_1, at:=5*e_1/14;
+ml7.4:ml7, at:=6*e_1/14;
+mb1_7.4:mb_1, at:=6*e_1/14;
+ml8.4:ml8, at:=7*e_1/14;
+mb1_8.4:mb_1, at:=7*e_1/14;
+ml9.4:ml9, at:=8*e_1/14;
+mb1_9.4:mb_1, at:=8*e_1/14;
+ml10.4:ml10, at:=9*e_1/14;
+mb1_10.4:mb_1, at:=9*e_1/14;
+ml11.4:ml11, at:=10*e_1/14;
+mb1_11.4:mb_1, at:=10*e_1/14;
+ml12.4:ml12, at:=11*e_1/14;
+mb1_12.4:mb_1, at:=11*e_1/14;
+ml13.4:ml13, at:=12*e_1/14;
+mb1_13.4:mb_1, at:=12*e_1/14;
+ml14.4:ml14, at:=13*e_1/14;
+mb1_14.4:mb_1, at:=13*e_1/14;
+
+
+//main body of magnet
+//first proper magnet chunk (focusing)
+//b1.4:multib1, at:=e_1;
+mb1.4:mb1, at:=e_1;
+b2.4:multib2, at:=e_1 + lbf_n/2;
+mb2.4:mb1, at:=e_1+lbf_n/2;
+
+//boundary region (F)
+mbo1.4:mbo1, at:=lbf-lbf_fr;
+mbf_1.4:mb_f, at:=lbf-lbf_fr;
+mbo2.4: mbo2, at:=lbf-lbf_fr*6/7;
+mbf_2.4:mb_f, at:=lbf-lbf_fr*6/7;
+mbo3.4: mbo3, at:=lbf-lbf_fr*5/7;
+mbf_3.4:mb_f, at:=lbf-lbf_fr*5/7;
+mbo4.4: mbo4, at:=lbf-lbf_fr*4/7;
+mbf_4.4:mb_f, at:=lbf-lbf_fr*4/7;
+mbo5.4: mbo5, at:=lbf-lbf_fr*3/7;
+mbf_5.4:mb_f, at:=lbf-lbf_fr*3/7;
+mbo6.4: mbo6, at:=lbf-lbf_fr*2/7;
+mbf_6.4:mb_f, at:=lbf-lbf_fr*2/7;
+mbo7.4: mbo7, at:=lbf-lbf_fr/7;
+mbf_7.4:mb_f, at:=lbf-lbf_fr/7;
+
+
+//boundary region (D)
+mbo8.4: mbo8, at:=lbf;
+mbd_1.4:mb_d, at:=lbf;
+mbo9.4: mbo9, at:=lbf+lbf_fr/7;
+mbd_2.4:mb_d, at:=lbf+lbf_fr/7;
+mbo10.4: mbo10, at:=lbf+2*lbf_fr/7;
+mbd_3.4:mb_d, at:=lbf+2*lbf_fr/7;
+mbo11.4: mbo11, at:=lbf+3*lbf_fr/7;
+mbd_4.4:mb_d, at:=lbf+3*lbf_fr/7;
+mbo12.4: mbo12, at:=lbf+4*lbf_fr/7;
+mbd_5.4:mb_d, at:=lbf+4*lbf_fr/7;
+mbo13.4: mbo13, at:=lbf+5*lbf_fr/7;
+mbd_6.4:mb_d, at:=lbf+5*lbf_fr/7;
+mbo14.4: mbo14, at:=lbf+6*lbf_fr/7;
+mbd_7.4:mb_d, at:=lbf+6*lbf_fr/7;
+
+//second magnet chunk (defocusing)
+//b3.4:multib3, at:=lbf+lbf_fr;
+mb3.4:mb2, at:=lbf+lbf_fr;
+b4.4:multib4, at:=lbf+lbf_fr+lbd_n/2;
+mb4.4:mb2, at:=lbf+lbf_fr+lbd_n/2;
+
+//third magnet chunk (defocusing)
+b5.4:multib5, at:=lbf+lbf_fr+lbd_n;
+mb5.4:mb3, at:=lbf+lbf_fr+lbd_n;
+b6.4:multib6, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+mb6.4:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2;
+
+//boundary region (D)
+mbo1_2.4: mbo1_2, at:=lbf+lbf+lbf-lbf_fr;
+mbd_8.4:mb_d, at:=lbf+lbf+lbf-lbf_fr;
+mbo2_2.4: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbd_9.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7;
+mbo3_2.4: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbd_10.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7;
+mbo4_2.4: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbd_11.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7;
+mbo5_2.4: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbd_12.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7;
+mbo6_2.4: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbd_13.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7;
+mbo7_2.4: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7;
+mbd_14.4:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7;
+
+//boundary region (F)
+mbo8_2.4:mbo8_2, at:=lbf+lbf+lbd;
+mbf_8.4:mb_f, at:=lbf+lbf+lbd;
+mbo9_2.4:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7;
+mbf_9.4:mb_f, at:=lbf+lbf+lbd+lbf_fr/7;
+mbo10_2.4:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbf_10.4:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7;
+mbo11_2.4:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbf_11.4:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7;
+mbo12_2.4:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbf_12.4:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7;
+mbo13_2.4:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbf_13.4:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7;
+mbo14_2.4:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7;
+mbf_14.4:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7;
+
+
+//last chunk (focusing)
+//b7.4:multib7, at:=lbf+lbf+lbd+lbf_fr;
+mb7.4:mb4, at:=lbf+lbf+lbd+lbf_fr;
+b8.4:multib8, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+mb8.4:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2;
+
+L=lbd+lbf+lbf+lbd;
+
+//2nd 14 sbends section
+mr1.4:mr1, at:=L-e_1;
+mb2_1.4:mb_4, at:=L-e_1;
+mr2.4:mr2, at:=L-13*e_1/14;
+mb2_2.4:mb_4, at:=L-13*e_1/14;
+mr3.4:mr3, at:=L-12*e_1/14;
+mb2_3.4:mb_4, at:=L-12*e_1/14;
+mr4.4:mr4, at:=L-11*e_1/14;
+mb2_4.4:mb_4, at:=L-11*e_1/14;
+mr5.4:mr5, at:=L-10*e_1/14;
+mb2_5.4:mb_4, at:=L-10*e_1/14;
+mr6.4:mr6, at:=L-9*e_1/14;
+mb2_6.4:mb_4, at:=L-9*e_1/14;
+mr7.4:mr7, at:=L-8*e_1/14;
+mb2_7.4:mb_4, at:=L-8*e_1/14;
+mr8.4:mr8, at:=L-7*e_1/14;
+mb2_8.4:mb_4, at:=L-7*e_1/14;
+mr9.4:mr9, at:=L-6*e_1/14;
+mb2_9.4:mb_4, at:=L-6*e_1/14;
+mr10.4:mr10, at:=L-5*e_1/14;
+mb2_10.4:mb_4, at:=L-5*e_1/14;
+mr11.4:mr11, at:=L-4*e_1/14;
+mb2_11.4:mb_4, at:=L-4*e_1/14;
+mr12.4:mr12, at:=L-3*e_1/14;
+mb2_12.4:mb_4, at:=L-3*e_1/14;
+mr13.4:mr13, at:=L-2*e_1/14;
+mb2_13.4:mb_4, at:=L-2*e_1/14;
+mr14.4:mr14, at:=L-e_1/14;
+mb2_14.4:mb_4, at:=L-e_1/14;
+mr15.4:mr15, at:=L;
+
+
+qq2a.4:qq2, at:=lbd+lbf+lbf+lbd+0.25+dq;
+
+xs3.4:xs3, at:=0.15, from=qq2a.4;
+xs4.4:xs4, at:=-0.15, from=qq2b.4;
+
+//p1:marker, at=lquad/2., from=qq2;
+//p3:marker, at=0.8, from=p1;
+//p4:marker, at=0.8, from=p3;
+//p5:marker, at=-0.8, from=p2;
+//p2:marker, at=lcell4-0.25 -lquad -dq;
+qq2b.4:qq2, at:=lcell4-0.25 -lquad -dq;
+endsequence;
+
+teraring: sequence, refer=entry, l:=circum;
+start_machine: marker, at:=0.;
+teracell1, at:=0.;
+teracell2, at:=lcell1;
+teracell3, at:=lcell1+lcell2;
+teracell4, at:=lcell1+lcell2+lcell3;
+endsequence;
+
+
+!call, file='PR_qq1qq2_ok.elex';
+!call, file='PR_qq1qq2_ok.dbx';
+
+!call, file='PR_qq1qq2_ok.seqx';
+
+MC6 = 11.174670;    ! Stripped Carbon6+ rest mass (GeV)
+T  = 0.430*12;      ! Total kinetic energy; 430 MeV/u (GeV)
+DEGREE:=PI/180.0;   ! For readability
+
+
+eg   := MC6+T;           !total energy
+bg   := eg/MC6;         !gamma
+en   := 3.75e-06;       !normalised emittance of injected beam
+
+
+exnPIMMS = 0.7E-6;
+eynPIMMS = 1E-6;
+
+
+BEAM,   MASS=MC6,       ! Fully stripped carbon beam
+        CHARGE=6,
+        ENERGY=eg,
+        exn=exnPIMMS,     ! normalised horizontal emittance [m]
+        eyn=eynPIMMS,
+    npart=2E10,
+; 
+
+use, sequence=teraring;
+
+select, flag=twiss, column=name, s, betx, bety, dx, dy, mux, muy,l,aper_1,aper_2;
+twiss,table=twiss, centre, file=280224_4cellsplit_multitwiss0.prt;
+twiss,table=twiss, file=280224_4cellsplit_multitwiss1_e.prt;
+plot,table=twiss,interpolate, haxis=s, vaxis=betx, bety,dx, colour=100, file="280224_4cellsplit_multi";
+
+select, flag=twiss,clear;
+select, flag=twiss, column=name, s, betx, bety, dx;
+//twiss,table=twiss, file=160124_rescaled_justf_6sbends.prt;
+
+
+//matching section
+/*
+MATCH, sequence=teraring;
+
+//CONSTRAINT, sequence=teraring,range=#e, ;
+//BETY=5.091700443,;
+//BETY=5.091700443, BETX=2.964371798, ALFA=0.7468188066;
+//CONSTRAINT, range=#e, DX=2.187744833;
+VARY, NAME=KBF, STEP=0.00001;
+VARY, NAME=KBD, STEP=0.00001;
+global, sequence=teraring, q1=0.3034613614; 
+global, sequence=teraring, q2= 0.1455500822;
+LMDIF, CALLS=10, TOLERANCE=1E-21;
+ENDMATCH;
+
+//CONSTRAINT, range=#e, BETYMAX=5.091700443;
+//CONSTRAINT, range=#e, DXRMS=2.187744833;
+*/
+/*
+
+
+ptc_create_universe;
+ptc_create_layout,model=2,method=6,nst=5,exact=true;
+ptc_setswitch,debuglevel=0,nocavity=false,fringe=true,exact_mis=true,time=true,totalpath=true;
+PTC_ALIGN;
+ptc_twiss,closed_orbit,table=ptc_twiss,icase=5,no=6,summary_table=ptc_twiss_summary;
+ptc_end;
+
+stop;
+
+*/
