@@ -14,15 +14,15 @@ import numpy.ma as ma
 #sig_y = (18e-3)
 sig_10x=0.85e-2
 sig_10y=1.78e-2
-init_amp_x=np.linspace(0,sig_10x/5,50)#sig_2x,3) #going from 0 to 2sigma for 3 steps in x
-init_amp_y=np.linspace(0,sig_10y/5,50)
+init_amp_x=np.linspace(0,sig_10x/10,50)#sig_2x,3) #going from 0 to 2sigma for 3 steps in x
+init_amp_y=np.linspace(0,sig_10y/10,50)
 X,Y = np.meshgrid(init_amp_x,init_amp_y)
 plt.rc('font',size=13)
 
-q_x_1024_1=list(np.loadtxt('1403_1024_xtunes_new_2sig.txt'))
-q_x_2048_1=list(np.loadtxt('1403_2048_xtunes_new_2sig.txt'))
-q_y_1024_1=list(np.loadtxt('1403_1024_ytunes_new_2sig.txt'))
-q_y_2048_1=list(np.loadtxt('1403_2048_ytunes_new_2sig.txt'))
+q_x_1024_1=list(np.loadtxt('1503_1024_xtunes_old_1sig.txt'))
+q_x_2048_1=list(np.loadtxt('1503_2048_xtunes_old_1sig.txt'))
+q_y_1024_1=list(np.loadtxt('1503_1024_ytunes_old_1sig.txt'))
+q_y_2048_1=list(np.loadtxt('1503_2048_ytunes_old_1sig.txt'))
 """
 q_x_1024_2=list(np.loadtxt('1503_1024_xtunes_5k.txt'))
 q_x_2048_2=list(np.loadtxt('1503_2048_xtunes_5k.txt'))
@@ -77,34 +77,33 @@ plt.ylabel('y/m')
 #plt.ylim([0,0.018])
 plt.colorbar(label='D')
 #plt.show()
-plt.savefig('150324tunediff_new_2sig.pdf')
+plt.savefig('150324tunediff_old_1sig.pdf')
 
 #FMA plot
 plt.clf()
 plt.scatter(q_x_1024,q_y_1024,marker='s',c=D,s=5,cmap='jet')
 plt.xlabel('$q_x$')
 plt.ylabel('$q_y$')
-plt.xlim([0.72,0.722])
+plt.xlim([0.721,0.7213])
 #plt.ylim([0.089,0.0915])
 plt.colorbar(label='D')
 #plt.show()
-plt.savefig('150324fma_new_2sig.pdf')
+plt.savefig('150324fma_old_1sig.pdf')
+
+
+
 """
-
-
-
-Jx=list(np.loadtxt('2802_jx_multi_test.txt'))
-Jy=list(np.loadtxt('2802_jy_multi_test.txt'))
+Jx=list(np.loadtxt('1503_jx_new_10sig.txt'))
+Jy=list(np.loadtxt('1503_jy_new_10sig.txt'))
 
 
 
 
 #tune shift with amplitude plots
 
-
 plt.clf()
 fig,ax=plt.subplots()
-ax.scatter((np.array(Jx)),q_x)
+ax.scatter((np.array(Jx)),q_x_1024)
 #plt.ylim(1.7212,1.7213)
 plt.xlabel('$Jx$')
 #plt.xlim(0.85*10**-3,0.85*10**-2)
@@ -113,7 +112,7 @@ plt.xlabel('$Jx$')
 plt.ylabel('$q_x$')
 plt.tight_layout()
 plt.show()
-plt.savefig('2802_xqx_multi_test.pdf')
+plt.savefig('150324_jxqx_new_10sig.pdf')
 plt.clf()
 
 print(np.gradient(q_x)/np.gradient(2*np.array(Jx)))
