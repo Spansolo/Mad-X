@@ -278,19 +278,20 @@ en   := 3.75e-06;       !normalised emittance of injected beam
 exnPIMMS = 0.7E-6;
 eynPIMMS = 1E-6;
 
+!beam, particle=electron, PC=3.0, EX=0.7E-6, EY=1.E-6;
 
 BEAM,   MASS=MC6,       ! Fully stripped carbon beam
         CHARGE=6,
         ENERGY=eg,
-        exn=exnPIMMS,     ! normalised horizontal emittance [m]
+        exn=5.6E-6,     ! normalised horizontal emittance [m]
         eyn=eynPIMMS,
     npart=2E10,
 ;
-
+/*
 use,sequence=teraring;
 select, flag=twiss, column=name, s, betx, bety, dx, dy, mux, muy,l,aper_1,aper_2;
 twiss,table=twiss, centre, file=300424_oldcct_newknl_movedsexts_twiss0.prt;
 twiss,table=twiss, file=300424_oldcct_newknl_movedsexts_twiss1_e.prt;
 plot,table=twiss,interpolate, haxis=s, vaxis=betx, bety,dx, colour=100, file="300424_oldcct_newknl_movedsexts";
-
+*/
 
