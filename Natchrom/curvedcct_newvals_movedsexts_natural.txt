@@ -1,0 +1,298 @@
+title, s='TERA ring, first';
+
+
+
+rho=1.90;
+
+dq:=0.1;  //added 0.25m space for dipole coils in the sequences
+
+
+/************************/
+d1                 =                  3 ;
+d2                 =                3.6 ;
+kb                 =       0.6887212564 ;
+klqq1              =      4.57989e-02;!old value0.01715481075;
+klqq2              =    -9.08053e-02;!old value -0.09507776434 ; // OK!
+/************************/
+
+//defining bending angles, strengths etc.
+
+fphi=0.5;
+phid=fphi *pi/4.; //dipole bending angle in defocusing plane
+phif=(1-fphi) *pi/4.; //dipole bending angle in focusing plane
+
+kbf:=(kb/fphi)*.5; //
+kbd:=(-kb/(1-fphi))*.5;
+
+lbd:=phid*rho;
+lbf:=phif*rho;
+
+lquad:=0.1;  //very thin!
+kqq1:=klqq1/lquad;
+kqq2:=klqq2/lquad;
+
+
+lcell1:=lbd+lbf+lbf+lbd+0.25+d1+0.25;
+lcell2:=lbd+lbf+lbf+lbd+0.25+d2+0.25;
+lcell3:=lbd+lbf+lbf+lbd+0.25+d1+0.25;  //same as lcell1
+lcell4:=lbd+lbf+lbf+lbd+0.25+d2+0.25;  //same as lcell2
+
+circum:=lcell1+lcell2+lcell3+lcell4;
+
+mb1: sbend, l:=lbf, angle:=phif, k1:=kbf,kill_ent_fringe=true,kill_exi_fringe=true;
+mb2: sbend, l:=lbd, angle:=phid, k1:=kbd,kill_ent_fringe=true, kill_exi_fringe=true;
+mb3: sbend, l:=lbd, angle:=phid, k1:=kbd,kill_ent_fringe=true, kill_exi_fringe=true;
+//by commenting these lines out, she's saying to take the fringe fields upon entry and //exit of the dipoles into account
+mb4: sbend, l:=lbf, angle:=phif, k1:=kbf,kill_ent_fringe=true,kill_exi_fringe=true;
+qq1: quadrupole, l:=lquad, k1:=kqq1;
+qq2: quadrupole, l:=lquad, k1:=kqq2;
+
+//sextupoles
+Sres1=  9.16956e-01;
+Sres2= -8.83112e-01; 
+
+xs1: multipole, knl:={0,0,Sres1};
+xs2: multipole, knl:={0,0,Sres2};
+xs3:multipole, knl:={0,0,Sres1};
+xs4: multipole, knl:={0,0,Sres2};
+
+//multipoles
+//side flattops
+k2L_1=-0.05436596178643661;
+k3L_1= 66.9973050509734;
+k2L_2=-0.5039420133509371;
+k3L_2=1.7178312740719655;
+
+//main flattop
+k2L_b=0.7869038088532447;
+k3L_b=41.11836943497804;
+
+//fringes
+k2L_lf_1=0.25871092294718673;
+k2L_lf_2=2.244516670487499;
+k2L_lf_3=0.2747265858910456;
+k3L_lf_1=-41.861626105018885;
+k3L_lf_2=38.19543732352709;
+k3L_lf_3=-1.9672180568333115;
+
+k2L_rf_1=0.13568472423715305;
+k2L_rf_2=1.998949295780053;
+k2L_rf_3=-0.10076591559289051;
+k3L_rf_1=-6.468008140187815;
+k3L_rf_2=11.96437411289542;
+k3L_rf_3=41.07200008432565;
+
+lhs: multipole, knl:={0,0,k2L_1,k3L_1};
+body: multipole, knl:={0,0,k2L_b,k3L_b};
+rhs: multipole, knl:={0,0,k2L_2,k3L_2};
+
+fringe_l_1: multipole, knl:={0,0,k2L_lf_1,k3L_lf_1};
+fringe_l_2: multipole, knl:={0,0,k2L_lf_2,k3L_lf_2};
+fringe_l_3: multipole, knl:={0,0,k2L_lf_3,k3L_lf_3};
+
+fringe_r_1: multipole, knl:={0,0,k2L_rf_1,k3L_rf_1};
+fringe_r_2: multipole, knl:={0,0,k2L_rf_2,k3L_rf_2};
+fringe_r_3: multipole, knl:={0,0,k2L_rf_3,k3L_rf_3};
+
+
+
+//defining the sequence of each cell
+
+teracell1: sequence, refer=entry, l:=lcell1;
+//first dipole
+fringe1.1:fringe_l_1, at:=0.; //left fringe
+fringe2.1:fringe_l_2, at:=0.; //left fringe
+fringe3.1:fringe_l_3, at:=0.; //left fringe
+mb1.1:mb1, at:=0;
+
+//second dipole, where first multi is
+multi1.1: lhs, at:=lbd;
+mb2.1:mb2, at:=lbd;
+
+
+//third dipole, second multi goes here
+multi2.1: body, at:=lbd+lbf;
+mb3.1:mb3, at:=lbd+lbf;
+
+
+//fourth dipole, third multi goes here
+multi3.1:rhs, at:=lbd+lbf+lbf;
+mb4.1:mb4, at:=lbd+lbf+lbf;
+fringe4.1:fringe_r_1, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe5.1:fringe_r_2, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe6.1:fringe_r_3, at:=lbd+lbf+lbf+lbd; //right fringe
+
+
+//quadrupoles
+qq1a.1:qq1, at:=lbd+lbf+lbf+lbd+0.25+dq;
+xs1.1:xs1, at:=lbd+lbf+lbf+lbd+0.25+dq+3*lquad;
+//p1:marker, at=lcell-d2*3./4.;
+//p2:marker, at=lcell-d2/2.;
+//p3:marker, at=lcell-d2/4.;
+
+qq1b.1:qq1, at:=lcell1-0.25 -lquad -dq;
+xs2.1:xs2, at:=lcell1-0.25 -lquad -dq + 3*lquad;
+endsequence;
+
+
+teracell2: sequence, refer=entry, l:=lcell2;
+fringe1.2:fringe_l_1, at:=0.; //left fringe
+fringe2.2:fringe_l_2, at:=0.; //left fringe
+fringe3.2:fringe_l_3, at:=0.; //left fringe
+mb1.2:mb1, at:=0;
+
+//second dipole, where first multi is
+multi1.2: lhs, at:=lbd;
+mb2.2:mb2, at:=lbd;
+
+
+//third dipole, second multi goes here
+multi2.2: body, at:=lbd+lbf;
+mb3.2:mb3, at:=lbd+lbf;
+
+
+//fourth dipole, third multi goes here
+multi3.2:rhs, at:=lbd+lbf+lbf;
+mb4.2:mb4, at:=lbd+lbf+lbf;
+fringe4.2:fringe_r_1, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe5.2:fringe_r_2, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe6.2:fringe_r_3, at:=lbd+lbf+lbf+lbd; //right fringe
+qq2a.2:qq2, at:=lbd+lbf+lbf+lbd+0.25+dq;
+
+//ES1, at:=0.25, from=qq2a.2;
+//MS1, at:=-0.25, from=qq2b.2;
+
+//p1:marker, at=lquad/2., from=qq2;
+//p3:marker, at=0.8, from=p1;
+//p4:marker, at=0.8, from=p3;
+//p5:marker, at=-0.8, from=p2;
+//p2:marker, at=lcell2-0.25 -lquad -dq;
+
+qq2b.2:qq2, at:=lcell2-0.25 -lquad -dq;
+endsequence;
+
+teracell3: sequence, refer=entry, l:=lcell3;
+
+fringe1.3:fringe_l_1, at:=0.; //left fringe
+fringe2.3:fringe_l_2, at:=0.; //left fringe
+fringe3.3:fringe_l_3, at:=0.; //left fringe
+mb1.3:mb1, at:=0;
+
+//second dipole, where first multi is
+multi1.3: lhs, at:=lbd;
+mb2.3:mb2, at:=lbd;
+
+
+//third dipole, second multi goes here
+multi2.3: body, at:=lbd+lbf;
+mb3.3:mb3, at:=lbd+lbf;
+
+
+//fourth dipole, third multi goes here
+multi3.3:rhs, at:=lbd+lbf+lbf;
+mb4.3:mb4, at:=lbd+lbf+lbf;
+fringe4.3:fringe_r_1, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe5.3:fringe_r_2, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe6.3:fringe_r_3, at:=lbd+lbf+lbf+lbd; //right fringe
+qq1a.3:qq1, at:=lbd+lbf+lbf+lbd+0.25+dq;
+xs1.3:xs1, at:=lbd+lbf+lbf+lbd+0.25+dq+3*lquad;
+
+
+
+//p1:marker, at=lcell3-d2*3./4.;
+//p2:marker, at=lcell3-d2/2.;
+//p3:marker, at=lcell3-d2/4.;
+
+qq1b.3:qq1, at:=lcell3-0.25 -lquad -dq;
+xs2.3:xs2, at:=lcell3-0.25 -lquad -dq+3*lquad;
+
+endsequence;
+
+teracell4: sequence, refer=entry, l:=lcell4;
+
+
+fringe1.4:fringe_l_1, at:=0.; //left fringe
+fringe2.4:fringe_l_2, at:=0.; //left fringe
+fringe3.4:fringe_l_3, at:=0.; //left fringe
+mb1.4:mb1, at:=0;
+
+//second dipole, where first multi is
+multi1.4: lhs, at:=lbd;
+mb2.4:mb2, at:=lbd;
+
+
+//third dipole, second multi goes here
+multi2.4: body, at:=lbd+lbf;
+mb3.4:mb3, at:=lbd+lbf;
+
+
+//fourth dipole, third multi goes here
+multi3.4:rhs, at:=lbd+lbf+lbf;
+mb4.4:mb4, at:=lbd+lbf+lbf;
+fringe4.4:fringe_r_1, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe5.4:fringe_r_2, at:=lbd+lbf+lbf+lbd; //right fringe
+fringe6.4:fringe_r_3, at:=lbd+lbf+lbf+lbd; //right fringe
+qq2a.4:qq2, at:=lbd+lbf+lbf+lbd+0.25+dq;
+
+
+
+//p1:marker, at=lquad/2., from=qq2;
+//p3:marker, at=0.8, from=p1;
+//p4:marker, at=0.8, from=p3;
+//p5:marker, at=-0.8, from=p2;
+//p2:marker, at=lcell4-0.25 -lquad -dq;
+qq2b.4:qq2, at:=lcell4-0.25 -lquad -dq;
+
+endsequence;
+
+//sequence for whole ring
+
+teraring: sequence, refer=entry, l:=circum;
+start_machine: marker, at:=0;
+teracell1, at:=0.;
+teracell2, at:=lcell1;
+teracell3, at:=lcell1+lcell2;
+teracell4, at:=lcell1+lcell2+lcell3;
+end_machine: marker at=circum;
+endsequence;
+
+
+
+
+//she's included the info from these files into this one file
+!call, file='PR_qq1qq2_ok.elex';
+!call, file='PR_qq1qq2_ok.dbx';
+!call, file='PR_qq1qq2_ok.seqx';
+
+option, -echo;
+
+
+MC6 = 11.174670;    ! Stripped Carbon6+ rest mass (GeV)
+T  = 0.430*12;      ! Total kinetic energy; 430 MeV/u (GeV)
+DEGREE:=PI/180.0;   ! For readability
+
+
+eg   := MC6+T;           !total energy
+bg   := eg/MC6;         !gamma
+en   := 3.75e-06;       !normalised emittance of injected beam
+
+
+exnPIMMS = 0.7E-6;
+eynPIMMS = 1E-6;
+
+
+BEAM,   MASS=MC6,       ! Fully stripped carbon beam
+        CHARGE=6,
+        ENERGY=eg,
+        ex=5.0E-6,     ! normalised horizontal emittance [m]
+        ey=3.3E-6,
+    npart=2E10,
+;
+
+use,sequence=teraring;
+select, flag=twiss, column=name, s, betx, bety, dx, dy, mux, muy,l,alfa,gamma;
+twiss,table=twiss, centre, file=270524_og_movedsexts_natural_multi_twiss0.prt;
+twiss,table=twiss, file=270524_og_movedsexts_natural_multi_twiss1_e.prt;
+plot,table=twiss,interpolate, haxis=s, vaxis=betx, bety,dx, colour=100, file="270524_og_movedsexts_natural_multi";
+
+
