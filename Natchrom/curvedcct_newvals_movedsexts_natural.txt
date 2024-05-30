@@ -48,8 +48,8 @@ qq1: quadrupole, l:=lquad, k1:=kqq1;
 qq2: quadrupole, l:=lquad, k1:=kqq2;
 
 //sextupoles
-Sres1=  9.16956e-01;
-Sres2= -8.83112e-01; 
+Sres1= 9.16956e-01;
+Sres2= -8.83112e-01;
 
 xs1: multipole, knl:={0,0,Sres1};
 xs2: multipole, knl:={0,0,Sres2};
