@@ -73,8 +73,8 @@ kbf:=(kb/fphi)*.5;
 kbd:=(-kb/(1-fphi))*.5;
 
 
-Sres1= 3.69498e+00; !9.16956e-01;
-Sres2= -3.18365e+00; !-8.83112e-01; 
+Sres1= 9.16956e-01;
+Sres2= -8.83112e-01; 
 
 xs1: multipole, knl:={0,0,Sres1};
 xs2: multipole, knl:={0,0,Sres2};
