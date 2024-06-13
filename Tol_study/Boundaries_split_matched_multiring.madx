@@ -1,0 +1,111 @@
+title, s='TERA ring, first';
+
+
+
+rho=1.90;
+
+dq:=0.1;  //added 0.25m space for dipole coils in the sequences
+
+
+/************************/
+d1                 =                  3 ;
+d2                 =                3.6 ;
+kb                 =       0.6887212564 ;
+klqq1              =      4.57989e-02;  !0.01715481075 1.16923e-02;! 
+klqq2              =       -9.08053e-02;   !-0.09507776434 ; ! // OK!
+/************************/
+
+fphi=0.5;
+phid=fphi *pi/4.;  //dipole bending angle in focusing plane
+phif=(1-fphi) *pi/4.;  //dipole bending angle in focusing plane
+
+
+lbd:=phid*rho;
+lbf:=phif*rho;
+
+lquad:=0.1;  //very thin!
+kqq1:=klqq1/lquad;
+
+kqq2:=klqq2/lquad;
+
+
+//scale factor for F magnets
+sf=((lbf-0.2-0.08)/lbf);
+
+
+//new lengths
+
+lbf_n:=sf*lbf;
+phif_n:=sf*phif;
+
+
+
+phid_n:=sf*phid;
+
+
+lcell1:=lbf+lbd+lbd+lbf+0.25+d1+0.25; 
+lcell2:=lbd+lbf+lbf+lbd+0.25+d2+0.25;  
+lcell3:=lbd+lbf+lbf+lbd+0.25+d1+0.25;  //same as lcell1
+lcell4:=lbd+lbf+lbf+lbd+0.25+d2+0.25;  //same as lcell2
+
+//end lengths
+//end scale factor
+ef=(0.2/lbf);
+e_1:=(lbf*ef);
+phi_e:=(phif*ef);
+
+//scale factor for boundary region lengths
+fr=0.08/lbf;
+
+//boundary region lengths
+lbf_fr:=fr*lbf;
+phif_fr:=fr*phif;
+phid_fr:=fr*phid;
+
+//scale factor for d magnets
+sf_d=(lbd-0.08)/lbd;
+lbd_n=sf_d*lbd;
+phid_n=sf_d*phid;
+
+circum:=lcell1+lcell2+lcell3+lcell4;
+
+kbf:=(kb/fphi)*.5; 
+kbd:=(-kb/(1-fphi))*.5;
+
+
+Sres1= 3.69498e+00; !9.16956e-01;
+Sres2= -3.18365e+00; !-8.83112e-01; 
+
+xs1: multipole, knl:={0,0,Sres1};
+xs2: multipole, knl:={0,0,Sres2};
+xs3: multipole, knl:={0,0,Sres1};
+xs4: multipole, knl:={0,0,Sres2};
+
+
+
+//new sbends
+//fringe sbends
+mb_1: sbend, l:=e_1/14, angle:=phi_e/14, k1:=kbf, kill_ent_fringe=true,kill_exi_fringe=true;
+
+//boundary sbends
+mb_f: sbend, l:=lbf_fr/7, angle:=phif_fr/7, k1:=kbf,kill_ent_fringe=true,kill_exi_fringe=true;
+mb_d:	sbend, l:=lbf_fr/7, angle:=phid_fr/7, k1:=kbd,kill_ent_fringe=true,kill_exi_fringe=true;
+
+//body sbends
+mb1: sbend, l:=lbf_n/2, angle:=phif_n/2, k1:=kbf,kill_ent_fringe=true , kill_exi_fringe=true;
+mb2: sbend, l:=lbd_n/2, angle:=phid_n/2, k1:=kbd,kill_ent_fringe=true, kill_exi_fringe=true;
+mb3: sbend, l:=lbd_n/2, angle:=phid_n/2, k1:=kbd,kill_ent_fringe=true, kill_exi_fringe=true;
+mb4: sbend, l:=lbf_n/2, angle:=phif_n/2, k1:=kbf,kill_ent_fringe=true,kill_exi_fringe=true;
+
+qq1: quadrupole, l:=lquad, k1:=kqq1;
+qq2: quadrupole, l:=lquad, k1:=kqq2;
+
+xs1: multipole, knl:={0,0,Sres1};
+xs2: multipole, knl:={0,0,Sres2};
+xs3: multipole, knl:={0,0,Sres3};
+xs4: multipole, knl:={0,0,Sres4};
+
+//fringe sbends
+mb_4: sbend, l:=e_1/14, angle:=phi_e/14, k1:=kbf, kill_ent_fringe=true, kill_exi_fringe=true;
+
+
