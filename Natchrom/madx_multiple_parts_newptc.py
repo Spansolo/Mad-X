@@ -53,6 +53,8 @@ madx = cp.cpymad_start(cpymad_logfile)
 madx.call('corrected_moremulti.madx')
 madx.use(sequence='TERARING') #sequence used by the file
 #output_line = cp.cpymad_print_output(cpymad_logfile)
+
+"""
 madx.input('SELECT,flag=TWISS,COLUMN=keyword, name, s, betx, alfx, mux, bety, alfy, muy, x,')
 madx_twiss = madx.twiss(sequence='TERARING', file='nimms_twiss.tfs').dframe()
 #before there was no .dframe()
@@ -163,7 +165,7 @@ py = []
 
 #convert to action angles
 #just commenting out the initial action angles as I want to calculate them from the amplitudes instead
-"""
+
 Jy = -(sig_2y**2)/(2*3.358349842)
 phi_y = -np.arctan2(3.358349842*py,sig_2y)
 """
@@ -233,9 +235,11 @@ for i in range(len(init_amp_y)):
         myString.append('''
         ptc_create_universe;
         ptc_create_layout, time=false, model=2, method=6, nst=5, exact=true;
+        ptc_set_switch;
         PTC_ALIGN;
+        ptc_twiss, closed_orbit, icase=5, no=6;
         PTC_START, X=%s, PX=0, Y=%s, PY=0, T=0, PT=0;
-        ptc_track, icase=5, closed_orbit,dump,MAXAPER={0.03,0.01,0.03,0.01},turns=2047,file=ptc_x_track,
+        ptc_track, icase=4, closed_orbit,dump,MAXAPER={0.03,0.01,0.03,.01},turns=2047,file=ptc_x_track_test,
         NORM_OUT;
         ptc_track_end;
         ptc_end;
@@ -253,7 +257,7 @@ plt.clf()
 #Add this to the final x values, y values, you name it.
 for i in range(len(myString)):
     madx.input(myString[i])
-    madx.use(sequence='TERARING')
+    
     #print(madx.table)
     #my particle is taking on the track.obs0001.p0001 dataframe each time, hence why it's
     # inside the loop.
