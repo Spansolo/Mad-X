@@ -213,7 +213,7 @@ BEAM,   MASS=MC6,       ! Fully stripped carbon beam
         eyn=3.3E-6,
     npart=2E10,
 ;
-
+/*
 use,sequence=teraring;
 
 EOPTION, SEED = 100, ADD=True; 
@@ -314,3 +314,4 @@ LMDIF, CALLS=5000, TOLERANCE=1E-10;
 ENDMATCH;
 
 /*
+*/

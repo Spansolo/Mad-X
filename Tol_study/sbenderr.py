@@ -48,18 +48,18 @@ madx = cp.cpymad_start(cpymad_logfile)
 #calling the mad-x file to be used
 #madx.call('NIMMS_og_newwp.txt')
 #madx.call('curvedcct_newvals_movedsexts_natural.txt')
-#madx.call('Boundaries_split_matched_multiring.madx')
-madx.call('allerr.madx')
+madx.call('Boundaries_split_matched_multiring_tuned.madx')
+#madx.call('allerr.madx')
 #madx.call('Boundaries_split_natural_movedsexts.madx')
 #madx.call('corrected_moremulti.madx')
 madx.use(sequence='TERARING') #sequence used by the file
-madx.input('EOPTION, SEED = 100, ADD=TRUE;')
+#madx.input('EOPTION, SEED = 100, ADD=TRUE;')
 
-madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.1"; EALIGN, DX= 0.001*TGAUSS(2.5), DY= 0.001*TGAUSS(2.5),DS =0.001*TGAUSS(2.5);')
-madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.2";EALIGN, DX= 0.001*TGAUSS(2.5), DY= 0.001*TGAUSS(2.5),DS =0.001*TGAUSS(2.5);')
-madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.3";EALIGN, DX= 0.001*TGAUSS(2.5), DY= 0.001*TGAUSS(2.5),DS =0.001*TGAUSS(2.5);')
-madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.4";EALIGN, DX= 0.001*TGAUSS(2.5), DY= 0.001*TGAUSS(2.5),DS =0.001*TGAUSS(2.5);')
-
+#madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.1"; EALIGN, DX= 0.0001*TGAUSS(2.5), DY= 0.0001*TGAUSS(2.5),DS =0.0001*TGAUSS(2.5);')
+#madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.2";EALIGN, DX= 0.0001*TGAUSS(2.5), DY= 0.0001*TGAUSS(2.5),DS =0.0001*TGAUSS(2.5);')
+#madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.3";EALIGN, DX= 0.0001*TGAUSS(2.5), DY= 0.0001*TGAUSS(2.5),DS =0.0001*TGAUSS(2.5);')
+#madx.input('SELECT, FLAG = ERROR, PATTERN = "mb*.4";EALIGN, DX= 0.0001*TGAUSS(2.5), DY= 0.0001*TGAUSS(2.5),DS =0.0001*TGAUSS(2.5);')
+"""
 madx.input('EOPTION, SEED = 100, ADD=True;')
 madx.input('SELECT, FLAG = ERROR, PATTERN = "qq1a.1";    EALIGN, DX = 0.00005*TGAUSS(2.5), DY = 0.00005*TGAUSS(2.5),DS = 0.00005*TGAUSS(2.5);')
 madx.input('SELECT, FLAG = ERROR, PATTERN = "qq1b.1";    EALIGN, DX = 0.00005*TGAUSS(2.5), DY = 0.00005*TGAUSS(2.5),DS = 0.00005*TGAUSS(2.5);')
@@ -77,9 +77,9 @@ madx.input('SELECT, FLAG = ERROR, PATTERN = "xs1.1";    EALIGN, DX = 0.00005*TGA
 madx.input('SELECT, FLAG = ERROR, PATTERN = "xs1_2.1";    EALIGN, DX = 0.00005*TGAUSS(2.5), DY = 0.00005*TGAUSS(2.5),DS = 0.00005*TGAUSS(2.5);')
 madx.input('SELECT, FLAG = ERROR, PATTERN = "xs3_1.3";    EALIGN, DX = 0.00005*TGAUSS(2.5), DY = 0.00005*TGAUSS(2.5),DS = 0.00005*TGAUSS(2.5);')
 madx.input('SELECT, FLAG = ERROR, PATTERN = "xs3_2.3";    EALIGN, DX = 0.00005*TGAUSS(2.5), DY = 0.00005*TGAUSS(2.5),DS = 0.00005*TGAUSS(2.5);')
+"""
 
-
-madx.input('EPRINT, FULL=TRUE')
+#madx.input('EPRINT, FULL=TRUE')
 
 """
 sx1=list(madx.elements['xs1'].knl)
@@ -516,7 +516,8 @@ external_file.close()
 
 with open("1009_2048_xtunes_sbenderr_tunedmulti_nat.txt","w") as external_file:
     print(*q_x_2048,sep='\n',file=external_file)
-external_file.cle()
+external_file.close()
+
 with open("1009_2048_ytunes_sbenderr_tunedmulti_nat.txt","w") as external_file:
     print(*q_y_2048,sep='\n',file=external_file)
 external_file.close()

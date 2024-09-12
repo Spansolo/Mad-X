@@ -912,7 +912,7 @@ BEAM,   MASS=MC6,       ! Fully stripped carbon beam
         eyn=3.3E-6,
     npart=2E10,
 ; 
-
+/*
 use, sequence=teraring;
 
 
@@ -950,7 +950,7 @@ EPRINT, FULL=TRUE;
 EPRINT, FULL=TRUE; 
 
 
-/*
+
 select, flag=twiss, column=name, s, betx, bety, dx, dy, mux, muy,l,alfa,gamma;
 twiss,table=twiss, centre, file=270824_newmulti_allerr_largerr_twiss0.prt;
 //twiss,table=twiss, file=250724_og_movedsexts_natural_multi_allerr_twiss1_e.prt;
@@ -980,7 +980,7 @@ ptc_track_end;
 ptc_end;
 
 stop;
-*/
+
 
 
 
@@ -993,7 +993,7 @@ plot,table=twiss,interpolate, haxis=s, vaxis=betx, bety,dx, colour=100, file="10
 select, flag=twiss, column=name, s, betx, bety, dx;
 //twiss,table=twiss, file=150324_rescaled_justf_6sbends.prt;
 
-/*
+
 //matching section
 
 MATCH, sequence=teraring;
