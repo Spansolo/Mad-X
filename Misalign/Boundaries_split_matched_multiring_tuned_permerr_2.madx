@@ -248,7 +248,7 @@ mb1_l14.1:mb_1, at:=13*e_1/14, dx=0.000055437, dy=0.00002862, ds=-0.000016502;
 
 //main body of magnet
 //first proper magnet chunk (focusing)
-mb1.1:mb1, at:=e_1, dx=0.00008, dy=0.00008, ds=-0.00008;
+mb1.1:mb1, at:=e_1,  dx=0.00005, dy=0.00005, ds=-0.00005;
 mb1_1b.1:multib1, at:=e_1 + lbf_n/2, dx=0.000055437, dy=0.00002862, ds=-0.000016502;
 mb1_2.1:mb1, at:=e_1+lbf_n/2, dx=0.000055437, dy=0.00002862, ds=-0.000016502;
 
@@ -551,155 +551,155 @@ endsequence;
 
 teracell3: sequence, refer=entry, l:=lcell3;
 //1st 14 sbends section
-mb3l1.3:l1, at:=0,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l1.3:mb_1, at:=0,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l2.3:l2, at:=e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l2.3:mb_1, at:=e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l3.3:l3, at:=2*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l3.3:mb_1, at:=2*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l4.3:l4, at:=3*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l4.3:mb_1, at:=3*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l5.3:l5, at:=4*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l5.3:mb_1, at:=4*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l6.3:l6, at:=5*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l6.3:mb_1, at:=5*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l7.3:l7, at:=6*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l7.3:mb_1, at:=6*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l8.3:l8, at:=7*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l8.3:mb_1, at:=7*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l9.3:l9, at:=8*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l9.3:mb_1, at:=8*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l10.3:l10, at:=9*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l10.3:mb_1, at:=9*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l11.3:l11, at:=10*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l11.3:mb_1, at:=10*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l12.3:l12, at:=11*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l12.3:mb_1, at:=11*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l13.3:l13, at:=12*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l13.3:mb_1, at:=12*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3l14.3:l14, at:=13*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_l14.3:mb_1, at:=13*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3l1.3:l1, at:=0,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l1.3:mb_1, at:=0,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l2.3:l2, at:=e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l2.3:mb_1, at:=e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l3.3:l3, at:=2*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l3.3:mb_1, at:=2*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l4.3:l4, at:=3*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l4.3:mb_1, at:=3*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l5.3:l5, at:=4*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l5.3:mb_1, at:=4*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l6.3:l6, at:=5*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l6.3:mb_1, at:=5*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l7.3:l7, at:=6*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l7.3:mb_1, at:=6*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l8.3:l8, at:=7*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l8.3:mb_1, at:=7*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l9.3:l9, at:=8*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l9.3:mb_1, at:=8*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l10.3:l10, at:=9*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l10.3:mb_1, at:=9*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l11.3:l11, at:=10*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l11.3:mb_1, at:=10*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l12.3:l12, at:=11*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l12.3:mb_1, at:=11*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l13.3:l13, at:=12*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l13.3:mb_1, at:=12*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3l14.3:l14, at:=13*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_l14.3:mb_1, at:=13*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 
 //main body of magnet
 //first proper magnet chunk (focusing)
-mb3_1.3:mb1, at:=e_1,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_b1.3:multib1, at:=e_1 + lbf_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_2.3:mb1, at:=e_1+lbf_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3_1.3:mb1, at:=e_1,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_b1.3:multib1, at:=e_1 + lbf_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_2.3:mb1, at:=e_1+lbf_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 //boundary region (F)
-mb3bo1.3:mbo1, at:=lbf-lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_1.3:mb_f, at:=lbf-lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo2.3: mbo2, at:=lbf-lbf_fr*6/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_2.3:mb_f, at:=lbf-lbf_fr*6/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo3.3: mbo3, at:=lbf-lbf_fr*5/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_3.3:mb_f, at:=lbf-lbf_fr*5/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo4.3: mbo4, at:=lbf-lbf_fr*4/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_4.3:mb_f, at:=lbf-lbf_fr*4/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo5.3: mbo5, at:=lbf-lbf_fr*3/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_5.3:mb_f, at:=lbf-lbf_fr*3/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo6.3: mbo6, at:=lbf-lbf_fr*2/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_6.3:mb_f, at:=lbf-lbf_fr*2/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo7.3: mbo7, at:=lbf-lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_7.3:mb_f, at:=lbf-lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3bo1.3:mbo1, at:=lbf-lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_1.3:mb_f, at:=lbf-lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo2.3: mbo2, at:=lbf-lbf_fr*6/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_2.3:mb_f, at:=lbf-lbf_fr*6/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo3.3: mbo3, at:=lbf-lbf_fr*5/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_3.3:mb_f, at:=lbf-lbf_fr*5/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo4.3: mbo4, at:=lbf-lbf_fr*4/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_4.3:mb_f, at:=lbf-lbf_fr*4/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo5.3: mbo5, at:=lbf-lbf_fr*3/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_5.3:mb_f, at:=lbf-lbf_fr*3/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo6.3: mbo6, at:=lbf-lbf_fr*2/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_6.3:mb_f, at:=lbf-lbf_fr*2/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo7.3: mbo7, at:=lbf-lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_7.3:mb_f, at:=lbf-lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 
 //boundary region (D)
-mb3bo8.3: mbo8, at:=lbf,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_1.3:mb_d, at:=lbf,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo9.3: mbo9, at:=lbf+lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_2.3:mb_d, at:=lbf+lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo10.3: mbo10, at:=lbf+2*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_3.3:mb_d, at:=lbf+2*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo11.3: mbo11, at:=lbf+3*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_4.3:mb_d, at:=lbf+3*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo12.3: mbo12, at:=lbf+4*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_5.3:mb_d, at:=lbf+4*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo13.3: mbo13, at:=lbf+5*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_6.3:mb_d, at:=lbf+5*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo14.3: mbo14, at:=lbf+6*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_7.3:mb_d, at:=lbf+6*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3bo8.3: mbo8, at:=lbf,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_1.3:mb_d, at:=lbf,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo9.3: mbo9, at:=lbf+lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_2.3:mb_d, at:=lbf+lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo10.3: mbo10, at:=lbf+2*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_3.3:mb_d, at:=lbf+2*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo11.3: mbo11, at:=lbf+3*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_4.3:mb_d, at:=lbf+3*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo12.3: mbo12, at:=lbf+4*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_5.3:mb_d, at:=lbf+4*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo13.3: mbo13, at:=lbf+5*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_6.3:mb_d, at:=lbf+5*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo14.3: mbo14, at:=lbf+6*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_7.3:mb_d, at:=lbf+6*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 //second magnet chunk (defocusing)
-mb3_3.3:mb2, at:=lbf+lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_b2.3:multib2, at:=lbf+lbf_fr+lbd_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_4.3:mb2, at:=lbf+lbf_fr+lbd_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3_3.3:mb2, at:=lbf+lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_b2.3:multib2, at:=lbf+lbf_fr+lbd_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_4.3:mb2, at:=lbf+lbf_fr+lbd_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 //third magnet chunk (defocusing)
-mb3_b3.3:multib3, at:=lbf+lbf_fr+lbd_n,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_5.3:mb3, at:=lbf+lbf_fr+lbd_n,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_b4.3:multib4, at:=lbf+lbf_fr+lbd_n+lbd_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_6.3:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3_b3.3:multib3, at:=lbf+lbf_fr+lbd_n,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_5.3:mb3, at:=lbf+lbf_fr+lbd_n,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_b4.3:multib4, at:=lbf+lbf_fr+lbd_n+lbd_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_6.3:mb3, at:=lbf+lbf_fr+lbd_n+lbd_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 //boundary region (D)
-mb3bo1_2.3: mbo1_2, at:=lbf+lbf+lbf-lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_8.3:mb_d, at:=lbf+lbf+lbf-lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo2_2.3: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_9.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo3_2.3: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_10.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo4_2.3: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_11.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo5_2.3: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_12.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo6_2.3: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_13.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo7_2.3: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3d_14.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3bo1_2.3: mbo1_2, at:=lbf+lbf+lbf-lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_8.3:mb_d, at:=lbf+lbf+lbf-lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo2_2.3: mbo2_2, at:=lbf+lbf+lbf-lbf_fr*6/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_9.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*6/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo3_2.3: mbo3_2, at:=lbf+lbf+lbf-lbf_fr*5/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_10.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*5/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo4_2.3: mbo4_2, at:=lbf+lbf+lbf-lbf_fr*4/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_11.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*4/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo5_2.3: mbo5_2, at:=lbf+lbf+lbf-lbf_fr*3/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_12.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*3/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo6_2.3: mbo6_2, at:=lbf+lbf+lbf-lbf_fr*2/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_13.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*2/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo7_2.3: mbo7_2, at:=lbf+lbf+lbf-lbf_fr*1/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3d_14.3:mb_d, at:=lbf+lbf+lbf-lbf_fr*1/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 //boundary region (F)
-mb3bo8_2.3:mbo8_2, at:=lbf+lbf+lbd,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_8.3:mb_f, at:=lbf+lbf+lbd,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo9_2.3:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_9.3:mb_f, at:=lbf+lbf+lbd+lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo10_2.3:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_10.3:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo11_2.3:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_11.3:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo12_2.3:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_12.3:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo13_2.3:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_13.3:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3bo14_2.3:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3f_14.3:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3bo8_2.3:mbo8_2, at:=lbf+lbf+lbd,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_8.3:mb_f, at:=lbf+lbf+lbd,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo9_2.3:mbo9_2, at:=lbf+lbf+lbd+lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_9.3:mb_f, at:=lbf+lbf+lbd+lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo10_2.3:mbo10_2, at:=lbf+lbf+lbd+2*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_10.3:mb_f, at:=lbf+lbf+lbd+2*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo11_2.3:mbo11_2, at:=lbf+lbf+lbd+3*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_11.3:mb_f, at:=lbf+lbf+lbd+3*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo12_2.3:mbo12_2, at:=lbf+lbf+lbd+4*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_12.3:mb_f, at:=lbf+lbf+lbd+4*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo13_2.3:mbo13_2, at:=lbf+lbf+lbd+5*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_13.3:mb_f, at:=lbf+lbf+lbd+5*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3bo14_2.3:mbo14_2, at:=lbf+lbf+lbd+6*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3f_14.3:mb_f, at:=lbf+lbf+lbd+6*lbf_fr/7,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 
 //last chunk (focusing)
-mb3_7.3:mb4, at:=lbf+lbf+lbd+lbf_fr,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_b5.3:multib5, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_8.3:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3_7.3:mb4, at:=lbf+lbf+lbd+lbf_fr,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_b5.3:multib5, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_8.3:mb4, at:=lbf+lbf+lbd+lbf_fr+lbf_n/2,   dx=0.00005, dy=0.00005, ds=-0.00005;
 L=lbd+lbf+lbf+lbd;
 
 //2nd 14 sbends section
-mb3r1.3:r1, at:=L-e_1,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r1.3:mb_4, at:=L-e_1,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r2.3:r2, at:=L-13*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r2.3:mb_4, at:=L-13*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r3.3:r3, at:=L-12*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r3.3:mb_4, at:=L-12*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r4.3:r4, at:=L-11*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r4.3:mb_4, at:=L-11*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r5.3:r5, at:=L-10*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r5.3:mb_4, at:=L-10*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r6.3:r6, at:=L-9*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r6.3:mb_4, at:=L-9*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r7.3:r7, at:=L-8*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r7.3:mb_4, at:=L-8*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r8.3:r8, at:=L-7*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r8.3:mb_4, at:=L-7*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r9.3:r9, at:=L-6*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r9.3:mb_4, at:=L-6*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r10.3:r10, at:=L-5*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r10.3:mb_4, at:=L-5*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r11.3:r11, at:=L-4*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r11.3:mb_4, at:=L-4*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r12.3:r12, at:=L-3*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r12.3:mb_4, at:=L-3*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r13.3:r13, at:=L-2*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r13.3:mb_4, at:=L-2*e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r14.3:r14, at:=L-e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3_r14.3:mb_4, at:=L-e_1/14,  dx=0.00008, dy=0.00008, ds=-0.00008;
-mb3r15.3:r15, at:=L,  dx=0.00008, dy=0.00008, ds=-0.00008;
+mb3r1.3:r1, at:=L-e_1,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r1.3:mb_4, at:=L-e_1,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r2.3:r2, at:=L-13*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r2.3:mb_4, at:=L-13*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r3.3:r3, at:=L-12*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r3.3:mb_4, at:=L-12*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r4.3:r4, at:=L-11*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r4.3:mb_4, at:=L-11*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r5.3:r5, at:=L-10*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r5.3:mb_4, at:=L-10*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r6.3:r6, at:=L-9*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r6.3:mb_4, at:=L-9*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r7.3:r7, at:=L-8*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r7.3:mb_4, at:=L-8*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r8.3:r8, at:=L-7*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r8.3:mb_4, at:=L-7*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r9.3:r9, at:=L-6*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r9.3:mb_4, at:=L-6*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r10.3:r10, at:=L-5*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r10.3:mb_4, at:=L-5*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r11.3:r11, at:=L-4*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r11.3:mb_4, at:=L-4*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r12.3:r12, at:=L-3*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r12.3:mb_4, at:=L-3*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r13.3:r13, at:=L-2*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r13.3:mb_4, at:=L-2*e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r14.3:r14, at:=L-e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3_r14.3:mb_4, at:=L-e_1/14,   dx=0.00005, dy=0.00005, ds=-0.00005;
+mb3r15.3:r15, at:=L,   dx=0.00005, dy=0.00005, ds=-0.00005;
 
 qq1a.3:qq1, at:=lbd+lbf+lbf+lbd+0.25+dq;
 xs3_1.3:xs1, at:=lbd+lbf+lbf+lbd+0.25+dq+3*lquad;
